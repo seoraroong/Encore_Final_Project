@@ -15,12 +15,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-
+from django.urls import path, include, re_path
+from django.conf import settings
+from rest_framework.permissions import AllowAny
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+from drf_yasg.generators import OpenAPISchemaGenerator
 from app import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("oauth/", include('oauth.url')),
+    path("users/", include('users.url')),
     path('', include('app.urls')),
     path('create/', views.your_model_create, name='create'),
     path('form/', views.your_form_view, name='your_form'),
