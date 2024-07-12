@@ -7,7 +7,21 @@ from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from .models import UserModel, UserRoleModel
+from django.contrib.auth.models import User
 
+
+class RegisterSerializer(serializers.Serializer):
+    username = serializers.CharField(max_length=100)
+    email = serializers.EmailField()
+    password = serializers.CharField(write_only=True)
+
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            password=validated_data['password']
+        )
+        return user
 
 class CreateUserSerializer(serializers.Serializer):
     social_id = serializers.CharField(max_length=100, help_text='소셜사용자_id')
@@ -109,4 +123,4 @@ class UserInfoSerializer(serializers.ModelSerializer):
 class UserInfoPhoneSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
-        fields = ('phone',)
+        fields = ('None')
