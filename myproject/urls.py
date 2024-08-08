@@ -29,7 +29,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),  # Django 기본 관리자 페이지 URL
     path('oauth/', include('oauth.urls')),  # oauth 애플리케이션의 URL 패턴을 포함
     path('users/', include('users.urls')),  # users 애플리케이션의 URL 패턴을 포함
-    path('diary/', include('diaryapp.urls'))
 ]
 
 

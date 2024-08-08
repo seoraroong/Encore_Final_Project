@@ -5,18 +5,122 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="737bdc5c-aaed-4eb9-813f-f8a7079d30cf" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/forms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/management/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/management/commands/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/management/commands/load_acc_category_code.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/management/commands/load_acc_description.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/management/commands/load_acc_overview.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/management/commands/load_accomodation_data.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/app/detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/app/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/app/your_form.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/diaryapp/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/diaryapp/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/diaryapp/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/diaryapp/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/diaryapp/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/diaryapp/templates/diary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/diaryapp/templates/elements.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/diaryapp/templates/generic.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/diaryapp/templates/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/diaryapp/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/diaryapp/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/diaryapp/views.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/myproject/secrets/secrets.json" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/secrets/secrets.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myproject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myproject/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/oauth/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/oauth/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/oauth/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/oauth/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/oauth/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/oauth/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/oauth/templates/oauth/base_social_login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oauth/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/oauth/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/oauth/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/oauth/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/css/fontawesome-all.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/css/images/overlay.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/css/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/css/noscript.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/css/swiper-bundle.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/js/breakpoints.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/js/browser.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/js/jquery.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/js/jquery.scrollex.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/js/jquery.scrolly.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/js/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/js/util.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/base/_page.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/base/_reset.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/base/_typography.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/components/_actions.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/components/_box.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/components/_button.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/components/_features.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/components/_form.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/components/_icon.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/components/_icons.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/components/_image.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/components/_list.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/components/_row.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/components/_section.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/components/_spotlight.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/components/_statistics.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/components/_table.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/layout/_footer.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/layout/_header.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/layout/_main.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/layout/_nav.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/layout/_wrapper.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/libs/_breakpoints.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/libs/_functions.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/libs/_html-grid.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/libs/_mixins.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/libs/_vars.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/libs/_vendor.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/main.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/sass/noscript.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/webfonts/fa-brands-400.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/webfonts/fa-brands-400.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/webfonts/fa-brands-400.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/webfonts/fa-brands-400.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/webfonts/fa-brands-400.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/webfonts/fa-regular-400.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/webfonts/fa-regular-400.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/webfonts/fa-regular-400.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/webfonts/fa-regular-400.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/webfonts/fa-regular-400.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/webfonts/fa-solid-900.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/webfonts/fa-solid-900.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/webfonts/fa-solid-900.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/webfonts/fa-solid-900.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/webfonts/fa-solid-900.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/pic01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/pic02.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/pic03.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/pic04.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/pic05.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/pic06.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/lib/backends.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/lib/backends.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/lib/permission.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/lib/permission.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/migrations/0001_initial.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/sericalizers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/logout.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/logout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
@@ -36,6 +140,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/oauth/views.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../PycharmProjects/pythonProject/.venv/Lib/site-packages/django/contrib/auth/__init__.py" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 6
@@ -49,21 +160,24 @@
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Python.runserver.executor&quot;: &quot;Run&quot;,
+    &quot;Python.runserver.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;login&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Playdata/Encore_Final_Project&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Playdata/Encore_Final_Project/users/templates/users&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
 }</component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Playdata\Encore_Final_Project\users\lib" />
-      <recent name="C:\Users\Playdata\Encore_Final_Project\static" />
-      <recent name="C:\Users\Playdata\Encore_Final_Project\static\images" />
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Playdata\Encore_Final_Project\users\templates\users" />
-      <recent name="C:\Users\Playdata\Encore_Final_Project\oauth\templates\oauth" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Playdata\Encore_Final_Project\users\static\users\assets\img" />
+      <recent name="C:\Users\Playdata\Encore_Final_Project\users\static\users\assets\css" />
+      <recent name="C:\Users\Playdata\Encore_Final_Project\users\static\users" />
+      <recent name="C:\Users\Playdata\Encore_Final_Project\users\static\assets\video" />
+      <recent name="C:\Users\Playdata\Encore_Final_Project\users\static\assets\img" />
     </key>
   </component>
   <component name="RunManager">
@@ -76,9 +190,8 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.12 (Encore_Final_Project)" />
-      <option name="WORKING_DIRECTORY" value="C:\projects\Encore_Final_Project" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\Playdata\Encore_Final_Project" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/manage.py" />
@@ -108,5 +221,31 @@
       <updated>1718928267546</updated>
     </task>
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../PycharmProjects/pythonProject/.venv/Lib/site-packages/django/contrib/auth/__init__.py</url>
+          <line>99</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <inline-watch fileUrl="file://$PROJECT_DIR$/oauth/views.py" line="49">
+        <watch expression="uri" language="Python" />
+      </inline-watch>
+    </watches-manager>
   </component>
 </project>

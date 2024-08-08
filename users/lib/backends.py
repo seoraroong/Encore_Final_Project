@@ -1,21 +1,17 @@
 from django.contrib.auth.backends import BaseBackend
-
 from users.models import UserModel
 
-
 class SettingsBackend(BaseBackend):
-    def authenticate(self, request, social_id=None):
-        user = None
+    def authenticate(self, request, email=None, password=None):
         try:
-            user = get(social_id=social_id)
+            user = UserModel.objects.get(email=email)
+            if user.check_password(password):
+                return user
         except UserModel.DoesNotExist:
-            pass
-        return user
+            return None  # 인증 실패 시 None 반환
 
-    def get_user(self, social_id):
-        user = None
+    def get_user(self, user_id):
         try:
-            user = get(social_id=social_id)
+            return UserModel.objects.get(pk=user_id)
         except UserModel.DoesNotExist:
-            pass
-        return user
+            return None

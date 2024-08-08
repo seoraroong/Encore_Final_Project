@@ -7,56 +7,30 @@ from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from .models import UserModel, UserRoleModel
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 
-class RegisterSerializer(serializers.Serializer):
-    username = serializers.CharField(max_length=100)
-    email = serializers.EmailField()
-    password = serializers.CharField(write_only=True)
-
-    def create(self, validated_data):
-        user = User.objects.create_user(
-            username=validated_data['username'],
-            email=validated_data['email'],
-            password=validated_data['password']
-        )
-        return user
-
-class CreateUserSerializer(serializers.Serializer):
-    social_id = serializers.CharField(max_length=100, help_text='소셜사용자_id')
-    social_type = serializers.CharField(max_length=20, help_text='소셜 타입')
-    email = serializers.EmailField(max_length=100, required=False, help_text='이메일')
-    phone = serializers.CharField(max_length=13, required=False, help_text='휴대폰 번호')
-
-    def validate(self, data):
-        if UserModel.objects.filter(social_id=data.get('social_id')).exists():
-            raise serializers.ValidationError({'error': 'Account Already Exists'})
-        return data
-
-    def create(self, validated_data):
-        validated_data['role'] = UserRoleModel.objects.get_or_create(id=2, name='user')[0]
-
-        user = UserModel.objects.create(**validated_data)
-        user.save()
-
-        return user
+User = get_user_model()
 
 
 class LoginSerializer(serializers.Serializer):
-    social_id = serializers.CharField(max_length=100)
     email = serializers.CharField(max_length=100)
     token = serializers.CharField(max_length=256, read_only=True)
 
     def validate(self, data):
-        user = authenticate(social_id=data.get('social_id'))
-        if user is None:
-            raise serializers.ValidationError({'error': 'User with given social_id does not exist'})
+        email = data.get('email')
+        try:
+            user = UserModel.objects.get(email=email)
+        except UserModel.DoesNotExist:
+            raise serializers.ValidationError({'error': 'User with given email does not exist'})
+        # user = authenticate(social_id=data.get('social_id'))
+        # if user is None:
+        #     raise serializers.ValidationError({'error': 'User with given social_id does not exist'})
 
         try:
             token = RefreshToken.for_user(user=user)
-        except:
-            raise serializers.ValidationError({'error': 'Failed create Token'})
+        except Exception as e:
+            raise serializers.ValidationError({'error': f'Failed create Token : {str(e)}'})
 
         # 사용자 email 변경된 경우 해당 email로 갱신
         if user.email != data['email']:
@@ -67,7 +41,7 @@ class LoginSerializer(serializers.Serializer):
         user.save()
 
         data = {
-            'social_id': user.social_id,
+            'email': user.email,
             'access_token': f'Bearer {str(token.access_token)}',
             'refresh_token': str(token),
         }
@@ -90,37 +64,63 @@ class RefreshTokenSerializer(serializers.Serializer):
     refresh_token = serializers.CharField(max_length=512)
 
     def validate(self, data):
-        # refresh_token 유저 검증
+        refresh_token = data['refresh_token']
         try:
             token = jwt.decode(data['refresh_token'], key=settings.SECRET_KEY, algorithms=settings.SIMPLE_JWT['ALGORITHM'])
         except jwt.ExpiredSignatureError:
             raise serializers.ValidationError({'error': 'Token Signature has expired'})
+        except jwt.InvalidTokenError:
+            raise serializers.ValidationError({'error': 'Invalid Token'})
+
+        email = token.get('email')
+        if not email:
+            raise serializers.ValidationError({'error': 'No email found in token'})
 
         try:
-            _ = UserModel.objects.get(social_id=token['social_id'])
+            user = UserModel.objects.get(email=email)
         except UserModel.DoesNotExist:
             raise serializers.ValidationError({'error': 'Invalid User'})
 
+        #Validate the refresh token
         try:
-            refresh_token = RefreshToken(data['refresh_token'])
-        except:
-            raise serializers.ValidationError({'error': 'Invalid Token'})
+            refresh_token_obj = RefreshToken(refresh_token)
+        except Exception as e:
+            raise serializers.ValidationError({'error': f'Invalid Token: {str(e)}'})
 
         data = {
-            'access_token': f'Bearer {str(refresh_token.access_token)}',
-            'refresh_token': str(refresh_token),
+            'access_token': f'Beare {str(refresh_token_obj.access_token)}',
+            'refresh_token': str(refresh_token_obj),
         }
         return data
+
+
+        # try:
+        #     _ = UserModel.objects.get(social_id=token['social_id'])
+        # except UserModel.DoesNotExist:
+        #     raise serializers.ValidationError({'error': 'Invalid User'})
+        #
+        # try:
+        #     refresh_token = RefreshToken(data['refresh_token'])
+        # except:
+        #     raise serializers.ValidationError({'error': 'Invalid Token'})
+        #
+        # data = {
+        #     'access_token': f'Bearer {str(refresh_token.access_token)}',
+        #     'refresh_token': str(refresh_token),
+        # }
+        # return data
 
 
 class UserInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
-        fields = ('social_id', 'social_type', 'email', 'phone', 'created_at', 'last_login')
-        read_only_fields = ('social_id', 'social_type', 'email', 'created_at', 'last_login')
+        fields = ('email', 'username', 'gender', 'nickname', 'register_id')
+        read_only_fields = ('email', 'mongo_id')
+
+        # read_only_fields = ('social_id', 'social_type', 'email', 'created_at', 'last_login')
 
 
 class UserInfoPhoneSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
-        fields = ('None')
+        fields = ('email', 'username', 'gender', 'nickname', 'register_id')

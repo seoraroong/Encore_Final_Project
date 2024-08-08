@@ -15,16 +15,30 @@ from datetime import timedelta
 import json
 import sys
 import os
+from dotenv import load_dotenv
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 CONFIG_BASE_DIR = Path(__file__).resolve().parent
 
+env_path = BASE_DIR / '.env'
+load_dotenv(dotenv_path=env_path)
+
 SECRET_BASE_FILE = os.path.join(CONFIG_BASE_DIR, 'secrets/secrets.json')
 secrets = json.loads(open(SECRET_BASE_FILE).read())
+
+secrets['SECRET_KEY'] = os.getenv('SECRET_KEY')
+secrets['NAVER_CLIENT_ID'] = os.getenv('NAVER_CLIENT_ID')
+secrets['NAVER_REDIRECT_URI'] = "http://localhost:8000/oauth/naver/login/callback/"
+secrets['NAVER_CLIENT_SECRET'] = os.getenv('NAVER_CLIENT_SECRET')
+secrets['STATE'] = os.getenv('STATE')
+
+with open(SECRET_BASE_FILE, 'w') as f:
+    json.dump(secrets, f, indent=4)
 for key, value in secrets.items():
     setattr(sys.modules[__name__], key, value)
-
 
 
 # Quick-start development settings - unsuitable for production
@@ -34,8 +48,8 @@ for key, value in secrets.items():
 DEBUG = True
 # DEBUG = True if os.environ.get('DJANGO_DEBUG', 'False') == 'True' else False
 
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 ALLOWED_HOSTS = []
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -52,8 +66,7 @@ INSTALLED_APPS = [
     'drf_yasg',
 
     'oauth',
-    'users',
-    'diaryapp'
+    'users'
 ]
 
 SITE_ID = 1  # site_id를 설정할 수 있음 (기본값은 1)
@@ -101,8 +114,8 @@ SIMPLE_JWT = {
 
     'AUTH_HEADER_TYPES': ('Bearer',),  # 인증 헤더 유형
     'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',  # 인증 헤더 명칭
-    'USER_ID_FIELD': 'social_id',  # 사용자 식별을 위한 토큰에 포함할 사용자 모델의 DB 필드명
-    'USER_ID_CLAIM': 'social_id',  # 사용자 식별을 저장하는 데 사용할 생성된 토큰의 클레임
+    'USER_ID_FIELD': 'email',  # 사용자 식별을 위한 토큰에 포함할 사용자 모델의 DB 필드명
+    'USER_ID_CLAIM': 'email',  # 사용자 식별을 저장하는 데 사용할 생성된 토큰의 클레임
 
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),  # 토큰 유형 지정 클래스
     'TOKEN_TYPE_CLAIM': 'token_type',  # 토큰 유형 저장 클레임 명칭
@@ -138,8 +151,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware'
 ]
-
+CSRF_COOKIE_HTTPONLY = True
 ROOT_URLCONF = 'myproject.urls'
 
 TEMPLATES = [
@@ -164,17 +178,30 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+import urllib.parse
+
+# URL 인코딩할 사용자 이름과 비밀번호
+username = 'Seora'
+password = 'playdata6292'
+
+# URL 인코딩
+encoded_username = urllib.parse.quote_plus(username)
+encoded_password = urllib.parse.quote_plus(password)
+
+# MongoDB URI 생성
+mongo_uri = f"mongodb+srv://{encoded_username}:{encoded_password}@mydiary.727yxhm.mongodb.net/MyDiary?retryWrites=true&w=majority"
+
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'oauth',  # 사용할 MongoDB 데이터베이스 이름
+        'NAME': 'MyDiary',
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
-            'host': 'localhost',  # MongoDB 호스트 주소
-            'port': 27017,  # MongoDB 포트 번호 (기본값)
+            'host': mongo_uri,
         }
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -208,10 +235,39 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    BASE_DIR / "users/static",
     ]
+
+
+# settings.py
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# settings.py
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'console': {
+#             'level': 'DEBUG',
+#             'class': 'logging.StreamHandler',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['console'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#         'users': {  # 로깅을 위해 'your_app_name'을 원하는 애플리케이션 이름으로 변경하세요
+#             'handlers': ['console'],
+#             'level': 'DEBUG',
+#             'propagate': False,
+#         },
+#     },
+# }
