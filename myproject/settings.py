@@ -293,18 +293,18 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 DEFAULT_FROM_EMAIL = "neweeee@gmail.com"
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'diaryData',  # 사용하려는 MongoDB 데이터베이스 이름
-        'ENFORCE_SCHEMA': False,          # 스키마 적용 여부 (MongoDB는 스키마가 없으므로 False)
-        'CLIENT': {
-            'host': 'mongodb://localhost:27017/',
-            'username': 'Hyeonna',  # 필요할 경우 사용자 이름
-            'password': '010217',  # 필요할 경우 비밀번호
-            'authSource': 'admin',        # 인증 데이터베이스 (기본적으로 'admin')
-            'authMechanism': 'SCRAM-SHA-1'  # 인증 메커니즘 (필요에 따라 설정)
-        }
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'diaryData',  # 사용하려는 MongoDB 데이터베이스 이름
+#         'ENFORCE_SCHEMA': False,          # 스키마 적용 여부 (MongoDB는 스키마가 없으므로 False)
+#         'CLIENT': {
+#             'host': 'mongodb://localhost:27017/',
+#             'username': 'Hyeonna',  # 필요할 경우 사용자 이름
+#             'password': '010217',  # 필요할 경우 비밀번호
+#             'authSource': 'admin',        # 인증 데이터베이스 (기본적으로 'admin')
+#             'authMechanism': 'SCRAM-SHA-1'  # 인증 메커니즘 (필요에 따라 설정)
+#         }
+#     }
+# }
 

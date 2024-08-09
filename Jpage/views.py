@@ -8,13 +8,9 @@ from django.shortcuts import render
 from django.http import HttpRequest
 from django.middleware.csrf import get_token
 
-
-
-# client = MongoClient('mongodb+srv://Seora:playdata6292@mydiary.727yxhm.mongodb.net/MyDiary?retryWrites=true&w=majority', 27017)
-# db = client.MyDiary
 client = MongoClient('mongodb://localhost:27017/',
                      27017)
-db = client.diaryData
+db = client.MyDiary
 
 def jpagerender(request):
     return render(request, 'Jpage/Jpage.html')
