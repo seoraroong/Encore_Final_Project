@@ -193,10 +193,7 @@ CSRF_HEADER_NAME = 'HTTP_X_CSRFTOKEN'  # CSRF 토큰을 포함할 헤더 이름
 WSGI_APPLICATION = "myproject.wsgi.application"
 
 # MongoDB 설정
-MONGO_URI = os.getenv('MONGO_URI')
-MONGO_USERNAME = os.getenv('MONGO_USERNAME')
-MONGO_PASSWORD = os.getenv('MONGO_PASSWORD')
-
+MONGO_URI = 'mongodb://127.0.0.1:27017/'
 
 # MongoDB 도커
 DATABASES = {
@@ -206,6 +203,7 @@ DATABASES = {
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
             'host': 'mongodb://127.0.0.1:27017/',  # MongoDB 호스트 주소 (기본적으로는 localhost)
+            # 'host': 'mongodb://192.168.0.25:27017/',
         }
     }
 }
