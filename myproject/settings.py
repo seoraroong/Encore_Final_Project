@@ -17,6 +17,7 @@ from dotenv import load_dotenv
 import json
 from datetime import timedelta
 import sys
+from pymongo import MongoClient
 import urllib.parse
 
 
@@ -193,7 +194,7 @@ CSRF_HEADER_NAME = 'HTTP_X_CSRFTOKEN'  # CSRF 토큰을 포함할 헤더 이름
 WSGI_APPLICATION = "myproject.wsgi.application"
 
 # MongoDB 설정
-MONGO_URI = 'mongodb://127.0.0.1:27017/'
+MONGO_URI = 'mongodb://192.168.0.25:27017/',
 #MONGO_URI = os.getenv('ATLAS_URI')
 
 # MongoDB 도커
@@ -204,7 +205,7 @@ DATABASES = {
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
             #'host': 'mongodb://127.0.0.1:27017/',  # MongoDB 호스트 주소 (기본적으로는 localhost)
-            'host': 'mongodb://127.0.0.1:27017/',
+            'host': 'mongodb://192.168.0.25:27017/',
         }
     }
 }
@@ -213,8 +214,6 @@ mongo_client = pymongo.MongoClient(DATABASES['default']['CLIENT']['host'],
                                    )
 # mongo_client를 settings에 추가
 MONGO_CLIENT = mongo_client
-
-
 
 # # MongoDB atlas
 # DATABASES = {
