@@ -192,39 +192,9 @@ CSRF_HEADER_NAME = 'HTTP_X_CSRFTOKEN'  # CSRF 토큰을 포함할 헤더 이름
 
 WSGI_APPLICATION = "myproject.wsgi.application"
 
-# MongoDB 설정
-MONGO_URI = os.getenv('MONGO_URI')
-MONGO_USERNAME = os.getenv('MONGO_USERNAME')
-MONGO_PASSWORD = os.getenv('MONGO_PASSWORD')
 
-#------------------------아틀라스-------------------------------------#
-# import urllib.parse
-#
-# # URL 인코딩할 사용자 이름과 비밀번호
-# username = 'Seora'
-# password = 'playdata6292'
-#
-# # URL 인코딩
-# encoded_username = urllib.parse.quote_plus(username)
-# encoded_password = urllib.parse.quote_plus(password)
-#
-# # MongoDB URI 생성
-# mongo_uri = f"mongodb+srv://{encoded_username}:{encoded_password}@mydiary.727yxhm.mongodb.net/MyDiary?retryWrites=true&w=majority"
-#
-# from pymongo import MongoClient
-#
-# MONGO_CLIENT = MongoClient('mongodb://localhost:27017/')
-#
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'djongo',
-#         'NAME': 'MyDiary',
-#         'ENFORCE_SCHEMA': False,
-#         'CLIENT': {
-#             'host': mongo_uri,
-#         }
-#     }
-# }
+# MongoDB 설정
+MONGO_URI = 'mongodb://192.168.0.25:27017/'
 
 
 # MongoDB 도커
@@ -234,15 +204,17 @@ DATABASES = {
         'NAME': 'MyDiary',  # 사용할 MongoDB 데이터베이스 이름
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
-            'host': 'mongodb://192.168.0.25:27017/',  # MongoDB 호스트 주소 (기본적으로는 localhost)
+            #'host': 'mongodb://127.0.0.1:27017/',  # MongoDB 호스트 주소 (기본적으로는 localhost)
+            'host': 'mongodb://192.168.0.25:27017/',
         }
     }
 }
 # MongoDB 클라이언트 설정
-mongo_client = pymongo.MongoClient(DATABASES['default']['CLIENT']['host'],
-                                   )
+mongo_client = pymongo.MongoClient(DATABASES['default']['CLIENT']['host'],)
 # mongo_client를 settings에 추가
 MONGO_CLIENT = mongo_client
+
+
 
 # 미디어 파일 저장 경로
 MEDIA_URL = '/media/'

@@ -23,13 +23,15 @@ from .services import authenticate_user
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import authenticate
+from pymongo import MongoClient
+import urllib.parse
+
 
 # 로깅 설정
 logger = logging.getLogger(__name__)
 
 # MongoDB 연결 설정---------아틀라스-------------------
-import urllib.parse
-from pymongo import MongoClient
+
 
 # URL 인코딩할 사용자 이름과 비밀번호
 # username = 'Seora'
@@ -61,7 +63,7 @@ db = settings.MONGO_CLIENT[settings.DATABASES['default']['NAME']]
 user_collection = db['users']
 user_model_collection = db['users_model']
 
-# start-------------
+#-------------------------설아 도커-------------------------------------------------------------------
 class User:
     def __init__(self, id, username, email, password, gender, nickname, mongo_id):
         self.id = id
@@ -111,7 +113,13 @@ def authenticate_user(email, password):
 class HomeView(TemplateView):
     template_name = 'users/home.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_session = self.request.session.get('userSession','Anonymous')
+        context['userSession'] = user_session
+        return context
 
+#------------------------------------------------------------------
 # 사용자 등록 함수
 def register(request):
     if request.method == 'POST':
@@ -205,7 +213,9 @@ def login_view(request):
 
             if user is not None:
                 # 로그인 성공
-                print("*********** login_view ********** login 호출전")
+                login(request, user)
+                request.session['userSession'] = user.username
+                print("*********** userSession ********** login 호출전")
 
                 # login(request, user)
                 response_data = {
