@@ -7,10 +7,9 @@ import json
 from django.shortcuts import render
 from django.http import HttpRequest
 from django.middleware.csrf import get_token
+from django.conf import settings
 
-client = MongoClient('mongodb://localhost:27017/',
-                     27017)
-db = client.MyDiary
+db = settings.MONGO_CLIENT[settings.DATABASES['default']['NAME']]
 
 def jpagerender(request):
     return render(request, 'Jpage/Jpage.html')
