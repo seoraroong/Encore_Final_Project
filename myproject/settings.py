@@ -194,6 +194,7 @@ WSGI_APPLICATION = "myproject.wsgi.application"
 
 # MongoDB 설정
 MONGO_URI = 'mongodb://127.0.0.1:27017/'
+#MONGO_URI = os.getenv('ATLAS_URI')
 
 # MongoDB 도커
 DATABASES = {
@@ -202,8 +203,8 @@ DATABASES = {
         'NAME': 'MyDiary',  # 사용할 MongoDB 데이터베이스 이름
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
-            'host': 'mongodb://127.0.0.1:27017/',  # MongoDB 호스트 주소 (기본적으로는 localhost)
-            # 'host': 'mongodb://192.168.0.25:27017/',
+            #'host': 'mongodb://127.0.0.1:27017/',  # MongoDB 호스트 주소 (기본적으로는 localhost)
+            'host': 'mongodb://127.0.0.1:27017/',
         }
     }
 }
@@ -212,6 +213,31 @@ mongo_client = pymongo.MongoClient(DATABASES['default']['CLIENT']['host'],
                                    )
 # mongo_client를 settings에 추가
 MONGO_CLIENT = mongo_client
+
+
+
+# # MongoDB atlas
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'MyDiary',  # 사용할 MongoDB 데이터베이스 이름
+#         'ENFORCE_SCHEMA': False,
+#         'CLIENT': {
+#             'host': os.getenv('ATLAS_URI'),
+#             'username': os.getenv('ATLAS_USERNAME'),
+#             'password': os.getenv('ATLAS_PASSWORD'),
+#         }
+#     }
+# }
+# # MongoDB 클라이언트 설정
+# mongo_client = pymongo.MongoClient(DATABASES['default']['CLIENT']['host'],
+#                                    username=DATABASES['default']['CLIENT']['username'],
+#                                    password=DATABASES['default']['CLIENT']['password']
+#                                    )
+# # mongo_client를 settings에 추가
+# MONGO_CLIENT = mongo_client
+
+
 
 # 미디어 파일 저장 경로
 MEDIA_URL = '/media/'
@@ -290,19 +316,4 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 DEFAULT_FROM_EMAIL = "neweeee@gmail.com"
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'djongo',
-#         'NAME': 'diaryData',  # 사용하려는 MongoDB 데이터베이스 이름
-#         'ENFORCE_SCHEMA': False,          # 스키마 적용 여부 (MongoDB는 스키마가 없으므로 False)
-#         'CLIENT': {
-#             'host': 'mongodb://localhost:27017/',
-#             'username': 'Hyeonna',  # 필요할 경우 사용자 이름
-#             'password': '010217',  # 필요할 경우 비밀번호
-#             'authSource': 'admin',        # 인증 데이터베이스 (기본적으로 'admin')
-#             'authMechanism': 'SCRAM-SHA-1'  # 인증 메커니즘 (필요에 따라 설정)
-#         }
-#     }
-# }
 

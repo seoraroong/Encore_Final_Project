@@ -3,7 +3,7 @@ import ast
 import bson
 import pymongo
 import uvicorn
-from fastapi import FastAPI, HTTPException, Request, Form, Depends, Response
+from fastapi import FastAPI, HTTPException, Request, Form, Depends, Response, Query
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime, timedelta
@@ -26,6 +26,8 @@ from pydantic import ValidationError
 import json
 from requests import request
 import uuid
+import django
+
 
 # 로깅 설정
 logging.basicConfig(level=logging.INFO)
@@ -45,9 +47,27 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+import sys
+# Django 프로젝트 루트 디렉토리를 sys.path에 추가
+sys.path.append(str(BASE_DIR))
+
+# nickname api
+from diaryapp.fastapi_app.nickname_app import generate_nickname
+
+# 프로젝트의 루트 디렉토리 경로 설정
+PROJECT_ROOT = 'myproject.settings'
+
+# Django 설정 로드
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', PROJECT_ROOT)
+django.setup()
+
 # MongoDB 클라이언트 설정
-client = pymongo.MongoClient('mongodb://127.0.0.1:27017')
-db = client['MyDiary']
+# client = pymongo.MongoClient('mongodb://127.0.0.1:27017')
+# db = client['MyDiary']
+from django.conf import settings
+db = settings.MONGO_CLIENT[settings.DATABASES['default']['NAME']]
 
 
 # Komoran 및 Word2Vec 모델 로드
@@ -79,6 +99,9 @@ class UserInput(BaseModel):
 
 class Recommendation(BaseModel):
     title: str
+    mapx: float
+    mapy: float
+    contentid: str
 
 class DayPlan(BaseModel):
     date: str
@@ -631,6 +654,7 @@ async def recommend_schedule(user_input: UserInput):
                 'date': (start_date + timedelta(days=day)).strftime('%Y-%m-%d'),
                 'recommendations': transform_object_id(daily_recommendations)
             })
+            logger.info(f"***************Daily Recommendations: {daily_recommendations}")
 
         # MongoDB에 일정 저장
         plan_id = str(uuid.uuid4())
@@ -639,7 +663,7 @@ async def recommend_schedule(user_input: UserInput):
             'province': user_input.region,
             'city': user_input.subregion,
             'plan_title': f"{user_input.region}의 여행 일정",
-            'email': 'example@example.com',  # 이 부분은 실제 이메일로 교체해야 합니다.
+            'email': 'neweeee@gmail.com',  # 이 부분은 실제 이메일로 교체해야 합니다.
             'days': itinerary
         }
         db.plan.insert_one(plan_data)
@@ -669,7 +693,12 @@ async def get_plan(plan_id: str):
         for day in plan_data["days"]:
             day_plan = DayPlan(
                 date=day["date"],
-                recommendations=[Recommendation(title=rec["title"]) for rec in day["recommendations"]]
+                recommendations=[Recommendation(
+                    title=rec["title"],
+                    mapx=rec.get("mapx"),
+                    mapy=rec.get("mapy"),
+                    contentid=rec.get("contentid")
+                ) for rec in day["recommendations"]]
             )
             itinerary.append(day_plan)
 
@@ -690,6 +719,10 @@ def test():
 async def startup_event():
     logger.info("FastAPI 서버가 시작되었습니다")
 
+@app.get("/generate-nickname/")
+async def nickname_app(plan_id: str = Query(...), content: str = Query(...)):
+    return await generate_nickname(plan_id=plan_id, content=content)
+
 if __name__=="__main__":
     # uvicorn.run("fastapi_app.app:app", host="0.0.0.0", port=5000, reload=True)
-    uvicorn.run("app:app", host="127.0.0.1", port=5000, reload=True)
+    uvicorn.run("app:app", host="0.0.0.0", port=5000, reload=True)
