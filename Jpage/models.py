@@ -46,6 +46,10 @@ class areaBaseList(models.Model):
     title = models.CharField(max_length=50)
     mapx = models.CharField(max_length=50)
     mapy = models.CharField(max_length=50)
+    addr1 = models.CharField(max_length=50)
+    firstimage = models.CharField(max_length=100)
+    overview = models.CharField(max_length=100)
+
 
     def __str__(self):
         return self.title

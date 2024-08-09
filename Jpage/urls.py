@@ -14,6 +14,7 @@ urlpatterns = [
     path('user_info/', views.user_info_view, name='user_info'),
     path('user_info/<str:user_email>/', views.user_info_view, name='user_info_with_email'),
     path('J/', views.jpagerender, name='jpagerender'),
+    path('get-csrf-token/', views.get_csrf_token, name='get_csrf_token'),
 ]
 
 

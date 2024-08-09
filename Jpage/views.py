@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.http import JsonResponse
 from pymongo import MongoClient
 from .models import categoryCode1, categoryCode2, categoryCode3, areaCode, cityDistrict, areaBaseList, jPlan
@@ -7,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from django.shortcuts import render
 from django.http import HttpRequest
+from django.middleware.csrf import get_token
 
 
 
@@ -63,7 +63,7 @@ def get_data(request):
 
     place_name = request.GET.get('placeName')
     if place_name:
-        coordinates = areaBaseList.objects.filter(title = place_name).values('mapx', 'mapy')
+        coordinates = areaBaseList.objects.filter(title = place_name).values('mapx', 'mapy', 'addr1', 'firstimage', 'overview')
     else:
         coordinates = []
 
@@ -140,13 +140,20 @@ def get_coordinate(request):
     place_name = request.GET.get('placeName')
 
     if place_name:
-        coordinates = areaBaseList.objects.filter(title=place_name).values('mapx', 'mapy').first()
+        coordinates = areaBaseList.objects.filter(title=place_name).values('mapx', 'mapy', 'addr1', 'firstimage', 'overview').first()
     else:
         coordinates = None
 
     print("get_coordinate:", coordinates)
     if coordinates:
-        return JsonResponse({'mapx': coordinates['mapx'], 'mapy': coordinates['mapy']})
+        return JsonResponse({
+            'mapx': coordinates['mapx'],
+            'mapy': coordinates['mapy'],
+            'address': coordinates['addr1'],
+            'imageUrl': coordinates['firstimage'],
+            'overview': coordinates['overview'],
+            'name': place_name
+        })
     else:
         return JsonResponse({'error': 'Place not found'}, status=404)
 
@@ -185,5 +192,9 @@ def get_Jplan(request):
 def user_info_view(request: HttpRequest, user_email=None):
     user_info = get_user(request, user_email)
     return render(request, 'map.html', user_info)
+
+def get_csrf_token(request):
+    csrf_token = get_token(request)
+    return JsonResponse({'csrfToken': csrf_token})
 
 
